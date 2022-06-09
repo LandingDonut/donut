@@ -34,6 +34,7 @@ const Section = styled.section`
   height: ${(props) => `calc(100vh - ${props.theme.navHeight})`};
   /* height: 100vh; */
   position: relative;
+  overflow: hidden;
   /* background-color: black; // 추후 변경 */
   /* scroll-snap-align: start;
   scroll-snap-stop: always; */
@@ -53,11 +54,13 @@ const Container = styled.div`
 `;
 
 const Box = styled.div`
-  width: 100%;
+  width: 100vh;
   height: 50%;
   max-width: 800px;
   justify-content: center;
   align-items: center;
+  position: relative;
+  /* overflow: hidden; */
   /* z-index: 2;
   position: absolute;
   left: 10%;
