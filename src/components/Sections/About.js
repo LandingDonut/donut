@@ -11,10 +11,13 @@ const Section = styled.section`
   min-width: 1500px;
   /* height: 100vh; */
   width: 100%;
-  background-color: black; // 추후 변경
+  /* background-color: black; // 추후 변경 */
   position: relative;
   /* scroll-snap-align: start;
   scroll-snap-stop: always; */
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  display: flex;
 `;
 const Container = styled.div`
   width: 100%;

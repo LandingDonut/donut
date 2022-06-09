@@ -7,6 +7,24 @@ import { Link, scroller } from "react-scroll";
 //import About from './About'
 import { useRef } from "react";
 import src from "gsap/src";
+import {
+  Animator,
+  ScrollContainer,
+  ScrollPage,
+  batch,
+  Fade,
+  FadeIn,
+  FadeOut,
+  Move,
+  MoveIn,
+  MoveOut,
+  Sticky,
+  StickyIn,
+  StickyOut,
+  Zoom,
+  ZoomIn,
+  ZoomOut,
+} from "react-scroll-motion";
 
 // min-height: ${props => `calc(100vh-${props.theme.navHeight})`};
 // const { scrollTop } = outerDivRef.current;
@@ -16,7 +34,7 @@ const Section = styled.section`
   height: ${(props) => `calc(100vh - ${props.theme.navHeight})`};
   /* height: 100vh; */
   position: relative;
-  background-color: black; // 추후 변경
+  /* background-color: black; // 추후 변경 */
   /* scroll-snap-align: start;
   scroll-snap-stop: always; */
 `;
@@ -40,10 +58,10 @@ const Box = styled.div`
   max-width: 800px;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  /* z-index: 2;
   position: absolute;
   left: 10%;
-  top: 20%;
+  top: 20%; */
 `;
 
 const GifBox = styled.div`
@@ -88,40 +106,39 @@ const DownButton = styled.button`
   margin-left: 50%;
   z-index: 6;
 `;
+
+const ZoomInScrollOut = batch(StickyIn(), FadeIn(), ZoomIn());
+
 const Home = () => {
   return (
-    <Section id="Home">
-      <Container>
-        <Box>
-          <TitleLight>Architecture for the mass through</TitleLight>
-          <TitleBold> Blockchain</TitleBold>
-          <TitleLight> and</TitleLight>
-          <TitleBold> metaverse</TitleBold>
-          <TitleLight> technology</TitleLight>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <ParaLight>We connect spatial</ParaLight>
-          <ParaBold> creators</ParaBold>
-          <ParaLight>
-            {" "}
-            with metaverse platforms on your terms, not theirs, so you can focus
-            on keep making cool stuff, while we deal with the rest of it
-          </ParaLight>
-        </Box>
-        <GifBox>
-          <CoverDonut />
-        </GifBox>
-        {/* <div height></div> */}
-        <DownButton>
-          <Link to="About" spy={true} smooth={true} offset={0} duration={1200}>
-            <img src={Down} color="black" />
-          </Link>
-        </DownButton>
-      </Container>
-    </Section>
+    <Box>
+      <TitleLight>Architecture for the mass through</TitleLight>
+      <TitleBold> Blockchain</TitleBold>
+      <TitleLight> and</TitleLight>
+      <TitleBold> metaverse</TitleBold>
+      <TitleLight> technology</TitleLight>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <ParaLight>We connect spatial</ParaLight>
+      <ParaBold> creators</ParaBold>
+      <ParaLight>
+        {" "}
+        with metaverse platforms on your terms, not theirs, so you can focus on
+        keep making cool stuff, while we deal with the rest of it
+      </ParaLight>
+    </Box>
+    // {/* <GifBox> */}
+    // <CoverDonut />
+    // {/* </GifBox> */}
+    // {/* <div height></div> */}
+    // {/* <DownButton>
+    //     <Link to="About" spy={true} smooth={true} offset={0} duration={1200}>
+    //       <img src={Down} color="black" />
+    //     </Link>
+    //   </DownButton> */}
   );
 };
 
