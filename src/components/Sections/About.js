@@ -15,8 +15,7 @@ const Section = styled.section`
   position: relative;
   /* scroll-snap-align: start;
   scroll-snap-stop: always; */
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
+  overflow: hidden;
   display: flex;
 `;
 const Container = styled.div`
