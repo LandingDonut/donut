@@ -2,6 +2,7 @@ import { ThemeProvider } from "styled-components";
 //import {Navigation} from 'swiper';
 import GlobalStyles from "./styles/GlobalStyles";
 import { dark } from "./styles/Themes";
+import styled from "styled-components";
 
 import Navigation from "./components/Navigation";
 import Home from "./components/Sections/Home";
@@ -9,84 +10,116 @@ import About from "./components/Sections/About";
 import Roadmap from "./components/Sections/Roadmap";
 import Team from "./components/Sections/Taem";
 import Zepeto from "./components/Sections/Zepeto";
+import Ichiri from "./components/Sections/Ichiri";
 import MoreAbout from "./components/Sections/MoreAbout";
 import SayHello from "./components/Sections/SayHello";
-
-// import './App.css';
-// const BodySection = styled.div`
-//   width: 70%;
-//   height: ${(props) => `calc(100vh - ${props.theme.navHeight})`};
-//   /* height:100vh; */
-//   min-width: 1000px;
-//   max-width: 3000px;
-//   //flex-Direction: column;
-//   //justify-content: space-between;
-//   //align-items: center;
-//   margin-left: 15%;
-//   /* scroll-behavior: smooth; */
-//   /* scroll-snap-type: y mandatory; */
-//   //scroll-padding-top:10px;
-
-//   //scroll-snap-stop: always;
-//   /* overflow-y: auto; */
-//   ::-webkit-scrollbar {
-//     display: none;
-//   }
-// `;
+import {
+  Animator,
+  ScrollContainer,
+  ScrollPage,
+  batch,
+  Fade,
+  FadeIn,
+  FadeOut,
+  Move,
+  MoveIn,
+  MoveOut,
+  Sticky,
+  StickyIn,
+  StickyOut,
+  Zoom,
+  ZoomIn,
+  ZoomOut,
+} from "react-scroll-motion";
+import CoverDonut from "./components/CoverDonut";
 
 const DIVIDER_HEIGHT = 5;
 function App() {
-  // gsap.registerPlugin(ScrollTrigger);
+  const Box = styled.div`
+    width: 100%;
+    height: 50%;
+    max-width: 800px;
+    justify-content: center;
+    align-items: center;
+    /* z-index: 2;
+    position: absolute;
+    left: 10%;
+    top: 20%; */
+  `;
 
-  // const scenes = gsap.utils.toArray(".scene");
+  const GifBox = styled.div`
+    width: 60%;
+    height: 60%;
+    min-width: 800px;
+    background-color: transparent;
+    z-index: 1;
+    display: flex;
+    /* justify-content:center; */
+    align-items: center;
+    position: absolute;
+    right: 0%;
+    top: 0%; ;
+  `;
+  const TitleLight = styled.span`
+    font-size: ${(props) => props.theme.fontxl};
+    font-weight: 200;
+  `;
+  const TitleBold = styled.span`
+    font-size: ${(props) => props.theme.fontxl};
+    font-weight: 600;
+  `;
+  const ParaLight = styled.span`
+    font-size: ${(props) => props.theme.fontms};
+    font-weight: 200;
+  `;
+  const ParaBold = styled.span`
+    font-size: ${(props) => props.theme.fontms};
+    font-weight: 500;
+  `;
+  const DownButton = styled.button`
+    background-color: ${(props) => props.theme.body};
+    border: none;
+    :hover {
+      cursor: pointer;
+    }
+    position: relative;
+    /* bottom: 0%; */
+    /* margin-top: 10%; */
+    margin-top: 70vh;
+    margin-left: 50%;
+    z-index: 6;
+  `;
 
-  // // Pinned scene
-  // // scenes.forEach((scene, i) => {
-  // //   ScrollTrigger.create({
-  // //     trigger: scene,
-  // //     scrub: true,
-  // //     pin: true,
-  // //     id: `scene-${i}`,
-  // //     start: "top top",
-  // //     end: "+=100%",
-  // //     // snap: 1 / (scenes.length * 2 - 1),
-  // //   });
-  // //   console.log("gogo");
-  // // });
-  // const snap = gsap.utils.snap([0, 0.4, 0.6, 1]);
-
-  // ScrollTrigger.create({
-  //   start: 0,
-  //   end: "max",
-  //   //snap: [0, 0.2, 0.4, 0.6, 0.8, 1]
-  //   //snap: 1/(scenes.length * 2 - 1)
-  //   snap: (value) => {
-  //     const snapped = snap(value);
-  //     if ((snapped * 10) % (0.4 * 10) === 0) {
-  //       console.log("down fixed");
-  //       console.log(snapped);
-  //       return snapped + 0.0002;
-  //     }
-  //     if (
-  //       (snapped * 10) % (0.4 * 10) !== 0 &&
-  //       (snapped * 10) % (0.2 * 10) === 0
-  //     ) {
-  //       console.log("up fixed");
-  //       console.log(snapped);
-  //       return snapped - 0.0002;
-  //     }
-  //     console.log(snapped, "problem");
-  //     return snapped;
-  //   },
-  // });
+  const ZoomInSection = batch(Sticky(), Fade(0, 1), ZoomIn(0.5, 1));
+  const ZoomDonut = batch(Sticky(), Fade(0, 1), Zoom(5, 0.5));
+  const MoveoutText = batch(Sticky(50, 25), Fade(0, 1), MoveOut(0, -400));
   return (
     <>
       <GlobalStyles />
       <ThemeProvider theme={dark}>
         <Navigation />
-        <Home />
-        <About />
-        <Zepeto />
+        <ScrollContainer>
+          <ScrollPage page={0}>
+            <Animator animation={ZoomDonut}>
+              <CoverDonut />
+            </Animator>
+            <Animator animation={MoveoutText}>
+              <Home />
+            </Animator>
+          </ScrollPage>
+          <ScrollPage page={1}></ScrollPage>
+          <ScrollPage page={2}>
+            <Animator animation={ZoomInSection}>
+              <Animator>
+                <About />
+              </Animator>
+            </Animator>
+          </ScrollPage>
+          {/* <ScrollPage page={3}>
+            <Animator animation={ZoomInSection}></Animator>
+          </ScrollPage> */}
+        </ScrollContainer>
+        <Ichiri />
         <MoreAbout />
         <Roadmap />
         <Team />
