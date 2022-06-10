@@ -67,8 +67,9 @@ function App() {
     top: 20%; */
   `;
   const tempBox = styled.div`
-    width: 100px;
-    height: 100px;
+    width: 80vw;
+    height: ${(props) => `calc(100vh - ${props.theme.navHeight})`};
+    position: relative;
   `;
   const GifBox = styled.div`
     width: 60%;
@@ -116,36 +117,64 @@ function App() {
   const ZoomInSection = batch(Sticky(), Fade(0, 1), ZoomIn(0.5, 1));
   const ZoomDonut = batch(Sticky(), Fade(0, 1), Zoom(5, 0.5));
   const MoveoutText = batch(Sticky(50, 25), Fade(0, 1), MoveOut(0, -400));
-  const IchiriSection = batch(Zoom(0.7, 1));
+  const IchiriSection = batch(Fade(0, 1));
   return (
     <>
       <GlobalStyles />
       <ThemeProvider theme={dark}>
         <Navigation />
-        <ScrollContainer snap="none">
-          <ScrollPage page={0}>
-            <Animator animation={ZoomDonut}>
-              <CoverDonut />
-            </Animator>
-            <Animator animation={MoveoutText}>
-              <Home />
-            </Animator>
-          </ScrollPage>
-          <ScrollPage page={1}></ScrollPage>
-          <ScrollPage page={2}>
-            <Animator animation={ZoomInSection}>
-              <Animator>
+        <div>
+          <ScrollContainer snap="none">
+            <ScrollPage page={0}>
+              <Animator animation={ZoomDonut}>
+                <CoverDonut />
+              </Animator>
+              <Animator animation={MoveoutText}>
+                <Home />
+              </Animator>
+            </ScrollPage>
+            <ScrollPage page={1}></ScrollPage>
+            <ScrollPage page={2}>
+              <Animator animation={ZoomInSection}>
                 <About />
               </Animator>
-            </Animator>
-          </ScrollPage>
-        </ScrollContainer>
-        <Ichiri />
+            </ScrollPage>
+          </ScrollContainer>
 
-        <MoreAbout />
-        <Roadmap />
-        <Team />
-        <SayHello />
+          <Ichiri />
+          <MoreAbout />
+          <Roadmap />
+          <Team />
+          <SayHello />
+          {/* <ScrollContainer>
+            <ScrollPage page={3}>
+              <Animator>
+                <Ichiri />
+              </Animator>
+            </ScrollPage>
+            <ScrollPage page={4}>
+              <Animator>
+                <MoreAbout />
+              </Animator>
+            </ScrollPage>
+            <ScrollPage page={5}>
+              <Animator>
+                <Roadmap />
+              </Animator>
+            </ScrollPage>
+            <ScrollPage page={6}>
+              <Animator>
+                <Team />
+              </Animator>
+            </ScrollPage>
+
+            <ScrollPage page={7}>
+              <Animator>
+                <SayHello />
+              </Animator>
+            </ScrollPage>
+          </ScrollContainer> */}
+        </div>
       </ThemeProvider>
     </>
   );
