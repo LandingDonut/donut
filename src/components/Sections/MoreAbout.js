@@ -6,7 +6,7 @@ const Section = styled.section`
   /* height: ${(props) => `calc(100vh - ${props.theme.navHeight})`}; */
   /* height: 100vh; */
   position: relative;
-  background-color: black; // 추후 변경
+  /* background-color: black; // 추후 변경 */
   padding-top: 10%;
   /* scroll-snap-align: start;
   scroll-snap-stop: always; */
@@ -16,7 +16,7 @@ const Container = styled.div`
   height: 100%;
   /* min-height: ${(props) => `calc(100vh - ${props.theme.navHeight})`}; */
   margin: 10%;
-  background-color: black; // 추후 변경
+  /* background-color: black; // 추후 변경 */
   display: flex;
   flex-direction: column;
 `;
